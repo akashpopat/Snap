@@ -20,6 +20,9 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
+
 public class MainActivity extends AppCompatActivity {
 
     /**
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this,LoginActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
