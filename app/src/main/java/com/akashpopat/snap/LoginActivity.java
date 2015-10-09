@@ -1,6 +1,7 @@
 package com.akashpopat.snap;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -57,9 +58,15 @@ public class LoginActivity extends AppCompatActivity {
                 else
                 {
                     // Login
+                    final ProgressDialog dialog = new ProgressDialog(LoginActivity.this);
+                    dialog.setTitle("Logging in");
+                    dialog.setMessage("");
+                    dialog.setCancelable(false);
+                    dialog.show();
                     ParseUser.logInInBackground(username, password, new LogInCallback() {
                         @Override
                         public void done(ParseUser parseUser, ParseException e) {
+                            dialog.dismiss();
                             if(e == null)
                             {
                                 // Success!
