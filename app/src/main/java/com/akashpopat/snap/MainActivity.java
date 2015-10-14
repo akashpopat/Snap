@@ -88,12 +88,12 @@ public class MainActivity extends AppCompatActivity {
                         startActivityForResult(takeVideoIntent, TAKE_VIDEO_REQUEST);
                     }
                     break;
-                case 3: // Choose pic
+                case 2: // Choose pic
                     Intent pickImageIntent = new Intent(Intent.ACTION_GET_CONTENT);
                     pickImageIntent.setType("image/*");
                     startActivityForResult(pickImageIntent,PICK_PHOTO_REQUEST);
                     break;
-                case 4: // Choose video
+                case 3: // Choose video
                     Intent pickVideoIntent = new Intent(Intent.ACTION_GET_CONTENT);
                     pickVideoIntent.setType("video/*");
                     Toast.makeText(MainActivity.this, R.string.video_file_size_warning,Toast.LENGTH_LONG).show();
@@ -212,10 +212,13 @@ public class MainActivity extends AppCompatActivity {
                 mediaScanIntent.setData(mMediaUri);
                 sendBroadcast(mediaScanIntent);
             }
+            Intent recipientsIntent = new Intent(this,RecipientsActivity.class);
+            startActivity(recipientsIntent);
         }
         else if(resultCode != RESULT_CANCELED){
             Toast.makeText(this, R.string.general_error,Toast.LENGTH_LONG).show();
         }
+
     }
 
     private void navigateToLogin() {
