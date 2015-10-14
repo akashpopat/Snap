@@ -1,10 +1,11 @@
 package com.akashpopat.snap;
 
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -17,18 +18,21 @@ import com.parse.SaveCallback;
 
 import java.util.List;
 
-public class EditFriendsActivity extends ListActivity {
+public class EditFriendsActivity extends AppCompatActivity {
 
     protected List<ParseUser> mUsers;
     protected ParseRelation<ParseUser> mFriendsRelation;
     protected ParseUser mCurrentUser;
+
+    ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_friends);
 
-        getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        mListView = (ListView) findViewById(R.id.list);
+        mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
     }
 
     @Override
@@ -59,7 +63,7 @@ public class EditFriendsActivity extends ListActivity {
                             , android.R.layout.simple_list_item_checked
                             , usernames);
 
-                    setListAdapter(adapter);
+                    mListView.setAdapter(adapter);
 
                     addFriendCheckmarks();
                 } else {
@@ -74,45 +78,42 @@ public class EditFriendsActivity extends ListActivity {
                 }
             }
         });
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (mListView.isItemChecked(i)) {
+                    mFriendsRelation.add(mUsers.get(i));
+                } else {
+                    mFriendsRelation.remove(mUsers.get(i));
+                }
+                mCurrentUser.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e != null) {
+                            Log.e("hey", e.getMessage());
+                        }
+                    }
+                });
+            }
+        });
     }
 
     private void addFriendCheckmarks() {
         mFriendsRelation.getQuery().findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> friends, ParseException e) {
-                if(e == null){
-                    for(int i = 0;i<mUsers.size();i++){
+                if (e == null) {
+                    for (int i = 0; i < mUsers.size(); i++) {
                         ParseUser user = mUsers.get(i);
 
-                        for (ParseUser friend : friends){
-                            if(friend.getObjectId().equals(user.getObjectId())){
-                                getListView().setItemChecked(i,true);
+                        for (ParseUser friend : friends) {
+                            if (friend.getObjectId().equals(user.getObjectId())) {
+                                mListView.setItemChecked(i, true);
                             }
                         }
                     }
-                }
-                else {
-                    Log.e("hey",e.getMessage());
-                }
-            }
-        });
-    }
-
-    @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-
-        if(getListView().isItemChecked(position)){
-            mFriendsRelation.add(mUsers.get(position));
-        }
-        else {
-            mFriendsRelation.remove(mUsers.get(position));
-        }
-
-        mCurrentUser.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e != null) {
+                } else {
                     Log.e("hey", e.getMessage());
                 }
             }
