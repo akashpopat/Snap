@@ -29,6 +29,6 @@ public class ViewImageActivity extends AppCompatActivity {
             public void run() {
                 finish();
             }
-        }, 10 * 1000);
+        }, 10000);
     }
 }
