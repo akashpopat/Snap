@@ -24,6 +24,9 @@
     <string name="error_file_size_too_large">The file is too large! Select a new file.</string>
     <string name="empty_recipients_list_message">Choose some friends first!</string>
     <string name="menu_send_label">Send</string>
+    <string name="error_selecting_file">There was a problem with the selected file. Please select a different file.</string>
+    <string name="sorry_error">We\'re sorry!</string>
+    <string name="error_sending_message">There was an error sending your message. Please try again!</string>
     <string-array name="camera_choice">
         <item>Take picture</item>
         <item>Take video</item>

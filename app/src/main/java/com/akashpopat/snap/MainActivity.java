@@ -213,6 +213,16 @@ public class MainActivity extends AppCompatActivity {
                 sendBroadcast(mediaScanIntent);
             }
             Intent recipientsIntent = new Intent(this,RecipientsActivity.class);
+            recipientsIntent.setData(mMediaUri);
+
+            String filetype;
+            if(requestCode == PICK_PHOTO_REQUEST || requestCode == TAKE_PHOTO_REQUEST){
+                filetype = ParseConstants.TYPE_IMAGE;
+            }
+            else {
+                filetype = ParseConstants.TYPE_VIDEO;
+            }
+            recipientsIntent.putExtra(ParseConstants.KEY_FILE_TYPE,filetype);
             startActivity(recipientsIntent);
         }
         else if(resultCode != RESULT_CANCELED){
