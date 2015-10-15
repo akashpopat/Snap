@@ -175,7 +175,7 @@ public class RecipientsActivity extends AppCompatActivity {
                 }
             });
 
-            message.put(ParseConstants.KEY_FILE_, file);
+            message.put(ParseConstants.KEY_FILE, file);
             return message;
         }
     }

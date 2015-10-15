@@ -35,11 +35,14 @@
         <activity
             android:name=".EditFriendsActivity"
             android:label="Edit Friends"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity" >
         </activity>
         <activity
             android:name=".RecipientsActivity"
-            android:parentActivityName=".MainActivity" >>
+            android:parentActivityName=".MainActivity" >
+>
+        </activity>
+        <activity android:name=".ViewImageActivity" >
         </activity>
     </application>
 
