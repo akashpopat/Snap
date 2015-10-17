@@ -1,4 +1,4 @@
-package com.akashpopat.snap;
+package com.akashpopat.snap.ui;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -18,6 +18,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.akashpopat.snap.R;
+import com.akashpopat.snap.adapters.SectionsPagerAdapter;
+import com.akashpopat.snap.utils.ParseConstants;
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -169,7 +172,8 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_tab_inbox);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_tab_friends);
 
     }
 

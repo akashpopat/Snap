@@ -1,4 +1,4 @@
-package com.akashpopat.snap;
+package com.akashpopat.snap.ui;
 
 import android.app.AlertDialog;
 import android.net.Uri;
@@ -13,6 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.akashpopat.snap.R;
+import com.akashpopat.snap.utils.FileHelper;
+import com.akashpopat.snap.utils.ParseConstants;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -165,8 +168,21 @@ public class RecipientsActivity extends AppCompatActivity {
 
             file.saveInBackground(new SaveCallback() {
                 public void done(ParseException e) {
-                    // Handle success or failure here ...
-                    Log.d("hey","files away");
+                    if(e == null) {
+                        // Handle success or failure here ...
+                        Log.d("hey", "files away");
+                    }
+                    else
+                    {
+                        // error
+                        AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
+                        builder.setMessage("Sorry file could not be uploaded. Try again")
+                                .setTitle(R.string.sorry_error)
+                                .setPositiveButton(android.R.string.ok, null);
+
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
                 }
             }, new ProgressCallback() {
                 public void done(Integer percentDone) {
@@ -199,7 +215,7 @@ public class RecipientsActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 if(e == null)
                 {
-                    SENT = true;
+                    Log.d("hey","full gone");
                     Toast.makeText(RecipientsActivity.this,"Sent!", Toast.LENGTH_LONG).show();
                 }
                 else {

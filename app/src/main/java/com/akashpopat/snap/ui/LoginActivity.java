@@ -1,4 +1,4 @@
-package com.akashpopat.snap;
+package com.akashpopat.snap.ui;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.akashpopat.snap.R;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -25,6 +26,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        if(getActionBar() != null)
+            getActionBar().hide();
+        else if(getSupportActionBar() != null)
+            getSupportActionBar().hide();
 
         mSignUpTextView = (TextView) findViewById(R.id.signUpText);
         mUsernmae = (EditText) findViewById(R.id.usernameField);

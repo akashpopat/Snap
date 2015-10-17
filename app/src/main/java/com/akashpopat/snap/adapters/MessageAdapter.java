@@ -1,4 +1,4 @@
-package com.akashpopat.snap;
+package com.akashpopat.snap.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.akashpopat.snap.R;
+import com.akashpopat.snap.utils.ParseConstants;
 import com.parse.ParseObject;
 
 import java.util.List;
@@ -22,7 +24,7 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
 
 
     public MessageAdapter(Context context, List<ParseObject> messages) {
-        super(context,R.layout.message_item, messages);
+        super(context, R.layout.message_item, messages);
 
         mContext = context;
         mMessages = messages;

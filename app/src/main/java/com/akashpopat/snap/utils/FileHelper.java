@@ -1,4 +1,4 @@
-package com.akashpopat.snap;
+package com.akashpopat.snap.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -64,10 +64,10 @@ public class FileHelper {
 	}
 	
 	public static byte[] reduceImageForUpload(byte[] imageData) {
-		Bitmap bitmap = com.akashpopat.snap.ImageResizer.resizeImageMaintainAspectRatio(imageData, SHORT_SIDE_TARGET);
+		Bitmap bitmap = ImageResizer.resizeImageMaintainAspectRatio(imageData, SHORT_SIDE_TARGET);
 		
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+		bitmap.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
 		byte[] reducedData = outputStream.toByteArray();
 		try {
 			outputStream.close();

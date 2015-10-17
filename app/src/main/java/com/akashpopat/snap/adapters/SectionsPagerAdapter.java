@@ -1,4 +1,4 @@
-package com.akashpopat.snap;
+package com.akashpopat.snap.adapters;
 
 /**
  * Created by akash on 10/9/2015.
@@ -8,6 +8,10 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.akashpopat.snap.R;
+import com.akashpopat.snap.ui.FriendsFragment;
+import com.akashpopat.snap.ui.InboxFragment;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -45,10 +49,20 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "Inbox";
+                //return "Inbox";
             case 1:
-                return "Friends";
+                //return "Friends";
         }
         return null;
+    }
+
+    public int getIcon(int position) {
+        switch (position) {
+            case 0:
+                return R.drawable.ic_tab_inbox;
+            case 1:
+                return R.drawable.ic_tab_friends;
+        }
+        return R.drawable.ic_tab_inbox;
     }
 }

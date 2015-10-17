@@ -1,4 +1,4 @@
-package com.akashpopat.snap;
+package com.akashpopat.snap.utils;
 
 /**
  * Created by akash on 10/9/2015.

@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" >
@@ -26,23 +26,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" >
+        <activity android:name=".ui.LoginActivity" >
         </activity>
         <activity
-            android:name=".SignUpActivity"
-            android:parentActivityName=".LoginActivity" >
+            android:name=".ui.SignUpActivity"
+            android:parentActivityName=".ui.LoginActivity" >
         </activity>
         <activity
-            android:name=".EditFriendsActivity"
+            android:name=".ui.EditFriendsActivity"
             android:label="Edit Friends"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".ui.MainActivity" >
         </activity>
         <activity
-            android:name=".RecipientsActivity"
-            android:parentActivityName=".MainActivity" >
+            android:name=".ui.RecipientsActivity"
+            android:parentActivityName=".ui.MainActivity" >
 >
         </activity>
-        <activity android:name=".ViewImageActivity" >
+        <activity android:name=".ui.ViewImageActivity">
         </activity>
     </application>
 

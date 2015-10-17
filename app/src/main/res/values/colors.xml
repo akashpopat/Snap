@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#61408C</color>
+    <color name="colorPrimaryDark">#61408C</color>
+    <color name="colorAccent">#ba9dda</color>
+    <color name="light_grey">#bbbbbb</color>
+    <color name="light_purple_button">#e1d2f3</color>
+    <color name="pressed_purple_button">#ba9dda</color>
+    <color name="focused_purple_button">#d6c3ed</color>
+    <color name="text_color">#250054</color>
+    <color name="light_purple_background">#e9e4ed</color>
 </resources>

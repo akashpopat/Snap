@@ -1,4 +1,4 @@
-package com.akashpopat.snap;
+package com.akashpopat.snap.ui;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.akashpopat.snap.R;
+import com.akashpopat.snap.utils.ParseConstants;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;

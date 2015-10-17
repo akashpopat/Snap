@@ -1,4 +1,4 @@
-package com.akashpopat.snap;
+package com.akashpopat.snap.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
