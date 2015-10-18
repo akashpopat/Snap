@@ -4,10 +4,12 @@ package com.akashpopat.snap.ui;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.akashpopat.snap.R;
 import com.akashpopat.snap.adapters.MessageAdapter;
@@ -28,17 +30,27 @@ import java.util.List;
 public class InboxFragment extends android.support.v4.app.ListFragment {
 
     protected List<ParseObject> mMessages;
+    protected SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_inbox, container, false);
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(mOnRefreshListner);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent,R.color.colorPrimary);
+
         return rootView;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        retrieveMessages();
+    }
+
+    private void retrieveMessages() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(ParseConstants.CLASS_MESSAGES);
         query.whereEqualTo(ParseConstants.KEY_RECIPIENTS_IDS, ParseUser.getCurrentUser().getObjectId());
         query.addDescendingOrder(ParseConstants.KEY_CREATED_AT);
@@ -46,6 +58,9 @@ public class InboxFragment extends android.support.v4.app.ListFragment {
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> list, ParseException e) {
+
+                if(mSwipeRefreshLayout.isRefreshing())
+                    mSwipeRefreshLayout.setRefreshing(false);
 
                 if (e == null) {
                     // success
@@ -88,6 +103,7 @@ public class InboxFragment extends android.support.v4.app.ListFragment {
             // image
             Intent intent = new Intent(getActivity(),ViewImageActivity.class);
             intent.setData(fileUri);
+            intent.putExtra(ParseConstants.KEY_SENDER_ID,message.getString(ParseConstants.KEY_SENDER_ID));
             startActivity(intent);
         }
         else {
@@ -115,5 +131,13 @@ public class InboxFragment extends android.support.v4.app.ListFragment {
             message.saveInBackground();
         }
     }
+
+    protected SwipeRefreshLayout.OnRefreshListener mOnRefreshListner = new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            Toast.makeText(getListView().getContext(),"Refresh",Toast.LENGTH_LONG).show();
+            retrieveMessages();
+        }
+    };
 }
 

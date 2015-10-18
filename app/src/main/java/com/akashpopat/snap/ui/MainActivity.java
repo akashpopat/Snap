@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected Uri mMediaUri;
 
-    protected DialogInterface.OnClickListener mDialogListner = new DialogInterface.OnClickListener() {
+    public DialogInterface.OnClickListener mDialogListner = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
             switch (i){

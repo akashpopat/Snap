@@ -42,6 +42,7 @@ public class RecipientsActivity extends AppCompatActivity {
 
     Uri mMediaUri;
     String mFileType;
+    String mSenderId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,25 @@ public class RecipientsActivity extends AppCompatActivity {
 
         mListView = (ListView) findViewById(R.id.lv);
         mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
+        mSenderId = getIntent().getStringExtra(ParseConstants.KEY_SENDER_ID);
+        if(mSenderId != null){
+            ParseObject message = createMessage();
+            if(message == null){
+                // error
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(R.string.error_selecting_file)
+                        .setTitle(R.string.sorry_error)
+                        .setPositiveButton(android.R.string.ok,null);
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+            else {
+                send(message);
+            }
+            finish();
+        }
     }
 
     @Override
@@ -149,7 +169,13 @@ public class RecipientsActivity extends AppCompatActivity {
         ParseObject message = new ParseObject(ParseConstants.CLASS_MESSAGES);
         message.put(ParseConstants.KEY_SENDER_ID,ParseUser.getCurrentUser().getObjectId());
         message.put(ParseConstants.KEY_SENDER_NAME,ParseUser.getCurrentUser().getUsername());
-        message.put(ParseConstants.KEY_RECIPIENTS_IDS,getRecipientIds());
+        if(mSenderId == null)
+            message.put(ParseConstants.KEY_RECIPIENTS_IDS,getRecipientIds());
+        else {
+            ArrayList<String> recipientIds = new ArrayList<>();
+            recipientIds.add(mSenderId);
+            message.put(ParseConstants.KEY_RECIPIENTS_IDS,recipientIds);
+        }
         message.put(ParseConstants.KEY_FILE_TYPE,mFileType);
 
         byte[] fileBytes = FileHelper.getByteArrayFromFile(this, mMediaUri);

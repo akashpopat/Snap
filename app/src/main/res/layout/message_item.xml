@@ -19,21 +19,30 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="8dp"
             android:src="@drawable/ic_picture"/>
+            <!--android:layout_alignTop="@+id/senderLabel"-->
+            <!--android:layout_alignBottom="@+id/senderLabel"/>-->
 
         <TextView
             android:id="@+id/senderLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/messageIcon"
-            android:layout_alignTop="@+id/messageIcon"
-            android:layout_centerInParent="true"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
+            android:paddingTop="8dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_toLeftOf="@+id/messageIcon"
             android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
+            android:textSize="16sp" />
+        <!--android:layout_marginTop="@dimen/activity_horizontal_margin"-->/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/timeLabel"
+            android:layout_below="@+id/senderLabel"
+            android:layout_alignStart="@+id/senderLabel"
+            android:paddingBottom="8dp"
+            android:textColor="@color/light_grey"/>
     </RelativeLayout>
 </LinearLayout>
